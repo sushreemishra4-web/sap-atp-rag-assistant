@@ -1,0 +1,210 @@
+1 Available-to-Promise Basics
+Available-to-promise (ATP) is the uncommitted portion of a company's
+inventory and planned production, used to support order promising for
+customer orders. The ATP quantity is very different from the available stock
+quantity. For example, perhaps there are 100 total pieces of stock for a prod-
+uct, but 80 pieces have already been committed to some sales orders or
+internal production. In that situation, the ATP quantity is only 20 pieces,
+which can be promised to new sales orders or new requirements.
+Order promising generally considers other business parameters in addition
+to ATP quantity. Suppose a sales order comes from an ordinary customer for
+20 pieces when the ATP quantity is 20; thus the sales order gets confirmed.
+The ATP quantity then becomes zero; if another sales order is received later
+for the same product, then that sales order can't be promised or confirmed.
+If this customer (whose order is received later) is a premium customer offer-
+ing a high price with good payment terms, then it may be more strategic
+(from a business perspective) to prioritize the sales order from the premium
+customer over that of the ordinary customer.
+s
+1 Available-to-Promise Basics
+ATP quantity is defined as follo\<VS:
+ATP quantity= Stock+ Receipts - Committed requirements
+The receipts can be purchase orders or planned orders, and committed
+requirements can be sales orders, deliveries, reservations, and the like.
+Figure 1.1 sho\ivs the calculation process for ATP quantity and some import-
+ant business considerations for prioritizat ion in product availability checks.
+Customer order
+ATP quantity ' , Stock ATP + Purchase order
++ Planned order -
+- - - Sales order (committed} - Delivery - Reservations Yes ' ,
+~
+No Prioritization
+parameters
+Price
+Payment terms
+Priority
+Service level
+Loyalty
+History of return
+Order promised Order not promised
+Available-to-promise (ATP)
+Figure 1.1 ATP Quantity and Business Considerations for Product Availability Checks
+If an order can't be promised for the requested quantity on the requested
+delivery date for a given product in a particular plant or warehouse, then
+other alternatives that may be considered include the following:
+• Replenish stock from anoth er plant
+If a product's availability is checked in, say, the Munich plant and it isn't
+available, then the same product's availability can be checked in, for
+example, another plant located in Frankfurt or another nearby location. If
+available, then the requisite quantity of the material can be transferred
+from the Frankfurt to the Munich plant.
+• Substitute the order with anoth er similar produ ct
+If a customer wants to buy an iPhone XS 32 GB Black, an alternative product,
+such as an iPhone XS 32 GB Gold, can be offered to the customer instead.
+6
+1 Available-to-Promise Basics
+ATP is a response to a customer's request for the availability of product; no
+manufacturer (or seller) wants to lose a customer due to nonavailability of
+products in today's competitive market. In the following sections, we'll
+evaluate the importance of promising to fulfill and committing to a cus-
+tomer order with multiple sellers and customers in a typical supply chain
+scenario, as well as review the ATP solutions provided by SAP.
+1.1 ATP in a Supply Chain
+ATP is one of the most critical business functions for all sellers in a supply
+chain, as depicted in Figure 1.2. There are financial impacts (apart from loss
+of goodwill, credibility, etc.) if a sales order from a customer can't be prom-
+ised on the requested delivery date or if there are missing parts during the
+assembly of finished goods (roller bearing, pump, etc.) in the production
+line, which can result in further delays in the delivery, down the line in sup-
+ply chain. However, no manufacturer or seller also wants to keep exces-
+sively high inventory levels (requiring higher working capital) to avoid
+stockouts.
+In addition, note the impact of nonconfirmation of an order (or delay in
+delivery) in a supply chain scenario. If there is a delay in delivery of roller
+bearings to a pump manufacturer for the supply chain scenario in Figure 1.2,
+for example, it may affect the delivery schedule of the pump to the power
+plant, resulting in a possible delay in the power plant's installation-com-
+missioning schedule.
+An organization's ATP situation is highly dynamic (i.e., it changes quickly),
+so up-to-date information on ATP is crucial for every manufacturer/seller in
+the supply chain. Availability of the right product with the right quality at
+the right time at the right place is the aim in every step of the supply chain.
+A manufacturer or seller generally has several customers. For example, the
+car manufacturer in Figure 1.2 has customers A, B, and C. If the demand is
+higher than the production capacity, then the prioritization parameters
+7
+1 Available-to-Promise Basics
+need to be considered to choose a customer and the order quantity that
+should be promised to the customer.
+In recent years, customers' demand has become unpredictable, and there is
+an increasing pressure to keep the stock as low as possible. This unpredict-
+able demand and the need for lower stock levels calls for efficient ATP capa-
+bilities across all parts of today's complex supply chain .
+-
+. Customer A
+•
+,....,
+: Customer B
+~ Car
+....._
+: ; Customer C
+•
+, , Steel - Roller bearing ,.
+- Pump I - Power Plant
+•
+* ATP ~
+Figure 1.2 ATP f or Sellers in Supply Chai n
+Fan 1
+1.2 Available-to-Promise with SAP
+ATP check functionality in SAP software is robust and provides extensive
+capabilities. SAP solutions with availability checks have also evolved over
+time to cater to the increasingly complex requirements in order promising
+in today's industry or supply chain.
+The concept of classic ATP remains the same in all SAP solutions and can be
+executed in transaction objects like sales orders (including delivery), stock
+transport orders, production orders, and project networks, using the same
+formula for calculation of ATP quantity:
+ATP quantity= Stock+ Planned receipts - Planned issues
+However, current solutions provide very advanced features for ATP checks
+(i.e., beyond classic ATP). The new ATP solution in SAP S/4HANA is called
+advanced available-to-promise (aATP), introduced in the 1610 release.
+8
+1 Available-to-Promise Basics
+Currently, SAP has three primary ATP solutions:
+• Classic ATP check in SAP ERP and SAP S/4HANA
+• Classic ATP check in SAP ERP in combination with global available-to-
+promise (GATP), part of SAP Advanced Planning and Optimization (SAP
+APO)
+• SAP S/4HANA for advanced ATP
+In common parlance, ATP and product availability check are often used
+interchangeably.
+Note
+SAP APO has four modules: Demand Planning (DP), Supply Network Planning
+(SNP), GATP, and Production Planning and Detailed Scheduling (PP-DS). Table 1.1
+describes these modules and their main features.
+Demand Planning (DP)
+Supply Network Planning (SNP)
+• Advanced demand management
+and forecasting methods
+• E asy aggregation and disaggrega-
+tion
+• Macro functiona lity for quick and
+user-friendly computations
+• Cross-plant planning for supply
+chain network
+• Rough-cut planning to be detailed
+through PP/DS
+• Advanced planning algorithms
+Global ATP (GATP)
+Production Planning and Detailed
+Scheduling (PP/DS)
+• Location and product substitution
+• Multilevel ATP (MATP)
+• Capability-to-promise (CTP)
+• Backorder processing
+• Plans material and capacity simul-
+taneously
+• Finite capacity planning
+• Advanced scheduling algorithms
+Table 1.1 Functionalities of SAP APO Modules
+In the following sections, we'll first discuss the similarities among the three
+solutions and then discuss where their functionality differs.
+9
+1 Available-to-Promise Basics
+Similarities in Solutions for Availability Check
+Classic ATP is executed at the time of sales order and delivery processing in
+all three solutions (SAP ERP, SAP ERP with GATP, and SAP S/4HANA), as
+depicted in Figure 1.3.
+SAP ERP
+Sales order 1-+<
+Order
+confirmation._ Delivery
+Goods issue
+SAP ERP
+Sales order
+Order confirmation
+Delivery
+Goods issue
+'
+Sales order -
+- ATP
+GATP Delivery -
+-
+ATP
+SAPS/4HANA
+Sales order i--+<
+Order
+confi rmation~ Delivery ~<
+Goods issue
+Figure 1.3 Execution of Classic ATP for Sales Order and Delivery P rocessing
+In addition to product availability check, all three ATP solutions also pro-
+vide features, including the following:
+• Product allocation
+This is a mechanism to avoid "first come, first served" problems in order
+management.
+• Backorder processing
+This is a re-ATP process (i.e., carrying out ATP after initial order creation)
+to confirm high-priority orders and unconfirm low-priority orders.
+Both product allocation and backorder processing are available in SAP ERP,
+SAP APO GATP, and aATP. GATP provides very advanced features for prod-
+uct allocation and backorder processing when used with SAP ERP. aATP has
+10
+1 Available-to-Promise Basics
+an entirely new design for product allocation and backorder processing
+with its SAP Fiori apps and is easier (and more flexible) to set up than the
+complex GATP. Product allocation and backorder processing with aATP will
+be discussed in detail in Section 3 and Section 5, respectively.
+Figure 1.4 shows the process flow for a sales order entry, along with its logis-
+tic execution; this typical process flow is applicable for all three ATP solu-
+tions with advanced features like product allocation and backorder pro-
+cessing.
