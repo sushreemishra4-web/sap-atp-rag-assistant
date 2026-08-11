@@ -1,3 +1,4 @@
+from pyarrow.util import doc
 import streamlit as st
 import chromadb
 from sentence_transformers import SentenceTransformer
@@ -18,8 +19,16 @@ def load_rag():
     chroma_client = chromadb.Client()
     collection = chroma_client.create_collection("atp_docs")
     
-    with open("SAP_ATP_BASIC.txt", "r") as f:
-        text = f.read()
+    documents = [
+    "SAP_ATP_BASIC.txt",
+    "FSCM_Credit_Management_S4HANA.txt",
+    "Order_to_Cash_S4HANA.txt"
+    ]
+
+    text = ""
+    for doc in documents:
+        with open(doc, "r") as f:
+            text += f.read() + "\n\n"
     
     def chunk_text(text, chunk_size=500, overlap=50):
         words = text.split()

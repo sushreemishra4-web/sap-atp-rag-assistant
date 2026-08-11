@@ -1,0 +1,135 @@
+SAP S/4HANA FSCM Credit Management
+====================================
+
+1. Overview
+-----------
+SAP S/4HANA Financial Supply Chain Management (FSCM) Credit Management manages customer credit exposure and helps prevent sales and deliveries that could create unacceptable financial risk.
+
+In S/4HANA, FSCM Credit Management replaces the classic SD credit management approach for many implementations. Credit decisions are integrated with Sales and Distribution (SD), while credit master data and exposure are managed centrally.
+
+Key objects:
+- Business Partner (BP) with the relevant credit management role
+- Credit Segment
+- Credit Limit
+- Risk Class
+- Check Rule
+- Credit Exposure
+- Credit Management Case / blocked document, where applicable
+
+2. Business Partner and Credit Master Data
+-------------------------------------------
+Customer credit data is maintained against the Business Partner in the Credit Management role.
+
+Typical configuration/data includes:
+- Credit segment assignment
+- Credit limit
+- Risk class
+- Check rule
+- Credit group
+- Credit horizon and exposure settings
+- Automatic credit control settings
+
+The credit segment determines the organisational area in which credit exposure is evaluated. A customer can therefore have different limits or credit policies for different segments.
+
+3. Credit Exposure
+------------------
+Credit exposure represents the customer's financial commitment that is relevant to the credit decision.
+
+Depending on configuration, exposure can include:
+- Open sales orders
+- Open deliveries
+- Open billing documents
+- Open receivables
+- Special liabilities or other relevant commitments
+
+The exposure is compared with the customer's available credit limit and the configured checking rules.
+
+A simplified relationship is:
+
+Available Credit = Credit Limit - Relevant Credit Exposure
+
+The actual calculation depends on configuration, update categories, credit horizons and other FSCM settings.
+
+4. Credit Check During the SD Process
+--------------------------------------
+A typical flow is:
+
+Sales Order
+    |
+    v
+Credit Check
+    |
+    +--> Passed --> Continue processing
+    |
+    +--> Failed --> Credit status/block
+                         |
+                         v
+                    Credit review/release
+
+Credit checks can be triggered at different points, such as sales order creation/change, delivery creation or other configured business events.
+
+The check can consider:
+- Credit limit
+- Current exposure
+- Risk class
+- Document value
+- Oldest open item
+- Maximum document value
+- Other configured check criteria
+
+5. Configuration Concepts
+-------------------------
+Important configuration areas include:
+- Credit management activation
+- Credit segments
+- Credit groups
+- Credit check rules
+- Automatic Credit Control
+- Risk classes
+- Check steps
+- Update of credit exposure
+- Integration between SD and FSCM
+
+The exact configuration depends on the S/4HANA release and the customer's credit policy.
+
+6. Monitoring and Troubleshooting
+---------------------------------
+When a sales document is unexpectedly blocked, check the following:
+
+1. Business Partner credit role and credit data.
+2. Customer-to-BP and sales area relationships.
+3. Credit segment determination.
+4. Credit limit and risk class.
+5. Credit check rule assigned to the transaction.
+6. Credit exposure and exposure categories.
+7. Credit status of the sales document.
+8. Whether the exposure has been updated correctly.
+9. Application logs and credit management information.
+10. Custom enhancements/BAdIs affecting the check.
+
+For an invoice-level or billing-related credit error, do not assume the problem is simply the customer's credit limit. Check why the billing document is triggering a credit check and which credit rule/check step is responsible.
+
+7. Credit Release
+-----------------
+A failed credit check can result in a blocked sales document or delivery depending on configuration.
+
+An authorised credit user can review:
+- Customer exposure
+- Credit limit utilisation
+- Open orders
+- Receivables
+- Reasons for the failed check
+
+The document can then be released when the business policy allows it.
+
+8. Key Benefits
+---------------
+FSCM Credit Management provides:
+- Centralised customer credit information
+- Real-time or near-real-time exposure management
+- More flexible credit checking
+- Better integration with Accounts Receivable and SD
+- Risk-based credit decisions
+- Improved visibility of blocked documents and credit utilisation
+
+In an S/4HANA implementation, successful credit management depends on correct BP master data, credit segment design, exposure updates, check rules and SD integration.

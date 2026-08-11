@@ -1,0 +1,214 @@
+SAP S/4HANA Order-to-Cash (O2C) Process
+==========================================
+
+1. Overview
+-----------
+Order-to-Cash (O2C) is the end-to-end business process that starts when a customer places an order and ends when payment is received and cleared.
+
+In SAP S/4HANA, the process integrates Sales and Distribution (SD) with Inventory Management, Logistics Execution, Transportation where applicable, Billing, Accounts Receivable (FI-AR), and Credit Management.
+
+Typical flow:
+
+Customer Inquiry/Quotation
+        |
+        v
+Sales Order
+        |
+        v
+Delivery
+        |
+        v
+Picking / Packing / Goods Issue
+        |
+        v
+Billing
+        |
+        v
+Accounts Receivable
+        |
+        v
+Incoming Payment / Clearing
+
+2. Pre-Sales Activities
+-----------------------
+The process may begin with:
+- Inquiry
+- Quotation
+- Customer-specific pricing
+- Availability checks
+- Customer and material determination
+
+A quotation can be converted into a sales order if the customer accepts the offer.
+
+3. Sales Order
+--------------
+The sales order captures the customer's commercial requirements.
+
+Important data includes:
+- Sold-to party
+- Ship-to party
+- Bill-to party
+- Payer
+- Material
+- Quantity
+- Plant
+- Requested delivery date
+- Pricing
+- Taxes
+- Payment terms
+- Incoterms
+- Shipping conditions
+
+During order processing, SAP can perform:
+- Availability/ATP checks
+- Pricing determination
+- Partner determination
+- Credit checks
+- Delivery scheduling
+- Output/message determination
+
+The result is an order containing the commercial and logistical requirements for fulfilment.
+
+4. Delivery Processing
+----------------------
+The outbound delivery controls the logistics execution of the sales order.
+
+Typical steps:
+1. Delivery creation
+2. Picking
+3. Packing, if applicable
+4. Transportation/shipping activities
+5. Post Goods Issue (PGI)
+
+PGI confirms that the goods have left the company's inventory. It normally triggers the relevant inventory and accounting updates.
+
+5. Billing
+----------
+After the required logistics steps are completed, the delivery can be billed.
+
+Common billing types include:
+- Invoice
+- Credit memo
+- Debit memo
+- Pro forma invoice, where applicable
+
+Billing copies relevant data from the preceding document according to copy-control settings.
+
+During billing, SAP determines:
+- Billing date
+- Pricing
+- Taxes
+- Payment terms
+- Accounting data
+- Customer receivable
+- Revenue and other relevant G/L postings
+
+The billing document normally creates an FI accounting document.
+
+6. Accounts Receivable and Payment
+----------------------------------
+Once billing is posted, the customer has an open receivable.
+
+The customer then makes payment. The incoming payment is posted in FI-AR and cleared against the relevant open invoice(s).
+
+The final stage is therefore:
+
+Invoice
+   |
+   v
+Open Customer Item
+   |
+   v
+Incoming Payment
+   |
+   v
+Cleared Item
+
+7. Integration Points
+---------------------
+O2C is highly integrated across SAP:
+
+SD:
+- Sales orders
+- Deliveries
+- Shipping
+- Billing
+- Pricing
+
+MM/Inventory:
+- Stock availability
+- Goods issue
+- Material movements
+
+FI:
+- Revenue posting
+- Tax
+- Accounts receivable
+- Incoming payment
+- Clearing
+
+FSCM Credit Management:
+- Credit limit
+- Credit exposure
+- Credit checks
+- Credit blocks/releases
+
+TM, EWM and other solutions may also participate depending on the S/4HANA landscape.
+
+8. Important Document Flow
+--------------------------
+A standard make-to-stock sales flow can look like:
+
+Quotation
+   ↓
+Sales Order
+   ↓
+Outbound Delivery
+   ↓
+Picking/Packing
+   ↓
+Post Goods Issue
+   ↓
+Billing Document
+   ↓
+FI Accounting Document
+   ↓
+Customer Payment
+   ↓
+Clearing
+
+SAP document flow allows users to trace the relationship between these documents and investigate issues across the process.
+
+9. Common O2C Issues
+--------------------
+Typical support issues include:
+- Incorrect or missing pricing
+- Wrong partner determination
+- ATP/availability failure
+- Delivery block
+- Credit block
+- Incomplete sales order
+- Picking or PGI failure
+- Billing block
+- Incorrect copy-control behaviour
+- Tax determination errors
+- Currency differences
+- FI posting errors
+- Customer payment or clearing issues
+
+For troubleshooting, start with the document flow and identify the first point where the expected data or status changes. Then analyse the relevant master data, configuration, determination procedure and enhancement.
+
+10. Key Success Factors
+-----------------------
+A reliable O2C process requires:
+- Correct customer/BP master data
+- Correct material and plant data
+- Robust pricing and tax determination
+- Accurate partner determination
+- Correct ATP and delivery settings
+- Proper credit management
+- Correct copy control
+- Reliable FI integration
+- Clear exception handling
+
+The strength of S/4HANA O2C is the integration of commercial, logistics and financial processes into a connected end-to-end flow, giving businesses better visibility from customer demand through fulfilment, billing and cash collection.
