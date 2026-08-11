@@ -8,8 +8,8 @@ import os
 
 load_dotenv()
 
-st.title("SAP ATP Assistant")
-st.caption("Ask questions about SAP ATP — powered by RAG")
+st.title("SAP Knowledge Assistant")
+st.caption("Ask questions about SAP ATP, Credit Management, and Order to Cash — powered by RAG")
 
 @st.cache_resource
 def load_rag():
