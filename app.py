@@ -59,7 +59,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-question = st.chat_input("Ask a question about SAP ATP...")
+question = st.chat_input("Ask a question about SAP Sales & Distribution...")
 
 if question:
     st.session_state.messages.append({"role": "user", "content": question})
